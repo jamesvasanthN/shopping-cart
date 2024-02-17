@@ -1,0 +1,155 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>shopping cart</title>
+</head>
+<body>
+    
+    <header><h1>Add product section</h1></header>
+    <section class="form-section">
+    
+    <div class="namediv">
+         <label>Name</label>
+         <input type="text" placeholder="enter your product name" id="product-name" required>
+    </div>
+    <div class="textarea-div">
+        <label>Description</label>
+        <textarea placeholder="product Description (only 255 characters)" required maxlength="255" id="description"></textarea>
+    </div>
+    <div class="image-div">
+        <label>image</label>   
+        <input type="file" accept=".jpg,.png,.jpeg" id="image" onchange="imagepreview(event)" required>
+        <img id="output" width="400" height="250">
+    </div>
+    <div class="originalprice-div">
+        <label>original price</label>
+        <input type="number" placeholder="price" id="originalprice" required>
+    </div>
+    <div class="discount">
+        <label>Discount</label>
+        <select id="selectdiscounttype">
+            <option value="percentage">percentage</option>
+            <option value="flat">flat</option>
+        </select>
+        <input type="number" placeholder="enter discount" id="discountvalue" onchange="discountcalculator()">
+    </div>
+    <div class="saleprice-div">
+        <label>sale price</label>
+        <input type="number" readonly id="saleprice">
+    </div>
+    <div class="maximum-quantity-div">
+        <label>maximum quantity</label>
+        <input type="number" placeholder="quantity" id="maximumquantity" value=""  required>
+    </div>
+    <div class="add-product">
+        <input type="submit" value="add product" id="add-product" onclick="addproduct()">
+    </div> 
+
+     
+</section>
+</body>
+</html>
+<script>
+    function addproduct(){
+        var name=document.getElementById('product-name').value;
+       var Description=document.getElementById('description').value;
+       var originalprice=document.getElementById('originalprice').value;
+       var discountvalue=document.getElementById('discountvalue').value;
+       var saleprice=document.getElementById('saleprice').value;
+       var maximumquantity=document.getElementById('maximumquantity').value;
+       var image=document.getElementById('output').src;
+
+       if(name,Description,image,originalprice,saleprice,maximumquantity){
+        var name=document.getElementById('product-name').value;
+       var Description=document.getElementById('description').value;
+       var originalprice=document.getElementById('originalprice').value;
+       var discountvalue=document.getElementById('discountvalue').value;
+       var saleprice=document.getElementById('saleprice').value;
+       var maximumquantity=document.getElementById('maximumquantity').value;
+       var image=document.getElementById('output').src;
+       localStorage.setItem("product-name",name)
+       localStorage.setItem("description",Description)
+       localStorage.setItem("originalprice",originalprice)
+       localStorage.setItem("discountvalue",discountvalue)
+       localStorage.setItem("saleprice",saleprice)
+       localStorage.setItem("maximumquantity",maximumquantity)
+       localStorage.setItem("image",image)
+       window.location.href='productinfo.html';
+       }
+       else if(name==""){
+        document.getElementById('product-name').style="border:2px solid red";
+       }
+       else if(Description==""){
+        document.getElementById('description').style="border:2px solid red";
+       }
+       else if(document.getElementById('output').src ==""){
+        document.getElementById('output').style="border:2px solid red";
+       }
+       else if(originalprice==""){
+        document.getElementById('originalprice').style="border:2px solid red";
+       }
+       else if(maximumquantity==""){
+        document.getElementById('maximumquantity').style="border:2px solid red";
+       }
+       
+       
+    //    else{
+    //     document.getelementbyid("add-product").disable=true;
+    //    }
+    //    else if(image.src){
+    //     document.getElementById('output').style="border:2px solid red";
+    //    }
+    //    else if(originalprice==0){
+    //     document.getElementById('originalprice').style="border:2px solid red";
+    //    }
+    //    else if(maximumquantity.length==0){
+    //     document.getElementById('maximumquantity').style="border:2px solid red";
+    //    }
+      
+       
+       
+    //     var name=document.getElementById('product-name').value;
+    //    var Description=document.getElementById('description').value;
+    //    var originalprice=document.getElementById('originalprice').value;
+    //    var discountvalue=document.getElementById('discountvalue').value;
+    //    var saleprice=document.getElementById('saleprice').value;
+    //    var maximumquantity=document.getElementById('maximumquantity').value;
+    //    var image=document.getElementById('output').src;
+       }
+        
+      
+    function discountcalculator(){
+      
+        var originalprice=document.getElementById('originalprice').value;
+        var discounttype=document.getElementById('selectdiscounttype').value;
+        var discountvalue=document.getElementById('discountvalue').value;
+        
+        if(originalprice,discountvalue){
+           if(discounttype=='percentage'){
+              var price=originalprice/100*discountvalue;
+              var saleprice=originalprice-price;
+              document.getElementById('saleprice').value=saleprice
+           }
+           else if(discounttype=='flat'){
+              var saleprice=originalprice-discountvalue;
+              document.getElementById('saleprice').value=saleprice
+           }
+        }
+        else{
+            saleprice =document.getElementById('originalprice').value
+        }
+    }
+
+
+    function imagepreview(event){
+        var reader = new FileReader();
+         reader.onload = function(){
+              var output = document.getElementById('output');
+              output.src = reader.result;
+             };
+    reader.readAsDataURL(event.target.files[0]);
+    }
+    
+</script>

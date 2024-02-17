@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="productinfo.css">
+    <title>product info</title>
+</head>
+<body>
+    <section class="section">
+    <img src="" id="output2" height="300" width="400">
+    <div class="buttons">
+    <input type="button" value="+" id="plus" onclick="plus()">
+    <input type="number" readonly  id="numberoutput" value="0">
+    <input type="button" value="-"  id="minus" onclick="minus()">
+    </div>
+    <div class="quantity">
+    <label for="">minimum quantity:1</label>
+    <label for="">maximum quantity:</label>
+    <input type="number" readonly id="maximum-quantity">
+    <label for="">Total price</label>
+    <input type="number" readonly id="price">
+    <input type="button" value="add to cart" id="gotocart" onclick="gotocart()">
+    </div>
+</section>
+</body>
+</html>
+<script>
+    
+    function gotocart(){
+        var price=document.getElementById("price").value
+        var howmanyquantity=document.getElementById("numberoutput").value
+        localStorage.setItem('totalprice',price)
+        localStorage.setItem('quantity',howmanyquantity)
+        if(numberoutput.value != 0){
+            window.location.href="gotocart.html"
+        }
+        else{
+            alert("minimum 1 product is needed")
+            document.getElementById("numberoutput").style="border:2px solid red";
+        }
+        // window.location.href="gotocart.html"
+    }
+
+    function plus(){
+        var number=document.getElementById('numberoutput').value;
+       if(number < parseInt(maximumquantity)){
+           var numberoutput = ++number;
+           document.getElementById('numberoutput').value=numberoutput;
+           var price=localStorage.getItem('saleprice')
+           var calulatedprice=price*numberoutput
+           document.getElementById('price').value=calulatedprice
+           console.log("----",calulatedprice)
+       }
+    }
+    function minus(){
+        var number=document.getElementById('numberoutput').value;
+        
+       if(number != 0){
+           var numberoutput = parseInt(number) - 1;
+           document.getElementById('numberoutput').value=numberoutput;
+           var price=localStorage.getItem('saleprice')
+           var calculatedprice=document.getElementById('price').value
+           var realprice=calculatedprice-price
+           document.getElementById('price').value=realprice
+           console.log("----",calculatedprice)
+           console.log("----",numberoutput)
+       }
+    }
+    
+    var productname=localStorage.getItem('product-name')
+    var description=localStorage.getItem('description')
+    var image=localStorage.getItem('image')
+    var maximumquantity=localStorage.getItem('maximumquantity')
+    document.getElementById('maximum-quantity').value=maximumquantity
+    document.getElementById('output2').src=image
+    console.log('product-name-------',productname);
+    console.log('description-------',description);
+    console.log('image---------',image);
+</script>

@@ -1,0 +1,50 @@
+body{
+    background-color: #5fcc32;
+    height: 600px;
+}
+h1{
+    text-align: center;
+    text-transform: capitalize;
+    color: rgb(76, 0, 255);
+}
+#name{
+    font-size: 20px;
+
+}
+#description{
+    font-size: 20px;
+    /* margin-top: 30px; */
+}
+#quantity{
+    font-size: 20px;
+    /* margin-top: 30px; */
+}
+#price{
+    font-size: 20px;
+}
+#totalprice{
+    font-size: 20px;
+    /* margin-top: 30px; */
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    
+    width: 400px;
+    position: relative;
+    left: 822;
+    bottom: 470px;
+}
+.details label{
+    font-weight: 700;
+    position: relative;
+    right: 200px;
+    top: 30px;
+}
+.details textarea{
+    height: 200px;
+    width: 490px
+}
+img{
+    border: 2px solid white;
+}
